@@ -9,19 +9,21 @@ public class Konyv  implements java.io.Serializable{
     public String Cim;
     public String Szerzo;
     public String Kiado;
-    public String KiadasiEv;
-    public ArrayList<String> Kulcsszavak;
+    public String KiadasiEv;                                //TODO:Datum tipusra allitas
+    public String Kulcsszo;
     public boolean Elerhetoseg;
 
-    public Konyv(int konyvID, String Cim,String Szerzo,String Kiado,String KiadasiEv,ArrayList<String> Kulcsszavak, boolean Elerhetoseg){
+    public Konyv(int konyvID, String Cim,String Szerzo,String Kiado,String KiadasiEv,String Kulcsszo, boolean Elerhetoseg){
         this.konyvID = konyvID;
         this.Cim = Cim;
         this.Szerzo =Szerzo;
         this.Kiado = Kiado;
         this.KiadasiEv = KiadasiEv;
-        this.Kulcsszavak = Kulcsszavak;
+        this.Kulcsszo = Kulcsszo;
         this.Elerhetoseg = Elerhetoseg;
     }
+
+
 
     public void setKonyvID(int konyvID) {
         this.konyvID = konyvID;
@@ -62,15 +64,22 @@ public class Konyv  implements java.io.Serializable{
         return KiadasiEv;
     }
 
-    public void setKulcsszavak(ArrayList<String> kulcsszavak) {
-        Kulcsszavak = kulcsszavak;
+    public void setKulcsszo(String kulcsszo) {
+        Kulcsszo = kulcsszo;
     }
-    public ArrayList<String> getKulcsszavak() {
-        return Kulcsszavak;
+
+    public String getKulcsszo() {
+        return Kulcsszo;
     }
 
     public void setElerhetoseg(boolean elerhetoseg) {
         Elerhetoseg = elerhetoseg;
+    }
+
+    public boolean getElerhetoseg(){ return Elerhetoseg; }
+
+    public boolean isElerhetoseg() {
+        return Elerhetoseg;
     }
 
 }

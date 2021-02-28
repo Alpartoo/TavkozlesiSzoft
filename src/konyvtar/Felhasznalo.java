@@ -5,9 +5,9 @@ public class Felhasznalo implements java.io.Serializable {
     public String Nev;
     public String Lakcim;
     public String Email;
-    public int Telefon;
+    public long Telefon;
 
-    public Felhasznalo(int felhasznaloID, String Nev,String Lakcim,String Email,int Telefon){
+    public Felhasznalo(int felhasznaloID, String Nev,String Lakcim,String Email,long Telefon){
         this.felhasznaloID = felhasznaloID;
         this.Nev = Nev;
         this.Lakcim =Lakcim;
@@ -47,11 +47,11 @@ public class Felhasznalo implements java.io.Serializable {
         return Email;
     }
 
-    public void setTelefon(int telefon) {
+    public void setTelefon(long telefon) {
         Telefon = telefon;
     }
 
-    public int getTelefon() {
+    public long getTelefon() {
         return Telefon;
     }
 }

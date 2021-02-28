@@ -4,12 +4,12 @@ public class Konyvtaros  implements java.io.Serializable{
     public int konyvtarosID;
     public String Nev;
     public String Lakcim;
-    public char Email;
+    public String Email;
     public int Telefon;
-    private char Jelszo;
+    private String Jelszo;
 
 
-    public Konyvtaros(int konyvtarosID, String Nev,String Lakcim,char Email,int Telefon,char Jelszo){
+    public Konyvtaros(int konyvtarosID, String Nev,String Lakcim,String Email,int Telefon,String Jelszo){
         this.konyvtarosID = konyvtarosID;
         this.Nev = Nev;
         this.Lakcim =Lakcim;
@@ -39,10 +39,10 @@ public class Konyvtaros  implements java.io.Serializable{
         return Lakcim;
     }
 
-    public void setEmail(char email) {
+    public void setEmail(String email) {
         Email = email;
     }
-    public char getEmail() {
+    public String getEmail() {
         return Email;
     }
 
@@ -53,10 +53,10 @@ public class Konyvtaros  implements java.io.Serializable{
         return Telefon;
     }
 
-    public void setJelszo(char jelszo) {
+    public void setJelszo(String jelszo) {
         Jelszo = jelszo;
     }
-    public char getJelszo() {
+    public String getJelszo() {
         return Jelszo;
     }
 }
