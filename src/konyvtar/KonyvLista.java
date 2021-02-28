@@ -109,32 +109,32 @@ public class KonyvLista implements java.io.Serializable {
         }
     }
 
-    public void konyvAdatModositasa(int konyvID,String tipus,String ujtipus){
+    public void konyvAdatModositasa(int konyvID,String tipus,String ujErtek){
         int ID=0;                                                       // meglehet csinalni,hogy egyszerre tobb parametert is valtoztassunk,
         for( int i=0;i< konyvLista.size();++i ) {                       // de jelenleg csak egyre mukodik.
             ID=konyvLista.get(i).getKonyvID();
             if (ID == konyvID) {
                 switch (tipus){
                     case "ID":
-                        konyvLista.get(i).setKonyvID(Integer.parseInt(ujtipus));            //TODO:valahol kell figyelni,hogy ha atallitok egy ID-t akkor
+                        konyvLista.get(i).setKonyvID(Integer.parseInt(ujErtek));            //TODO:valahol kell figyelni,hogy ha atallitok egy ID-t akkor
                         break;                                                              //TODO:kovetkezo kony ID hozzadasanal ne legyen utkozes --utolagos munka
                     case "Cim":
-                        konyvLista.get(i).setCim(ujtipus);
+                        konyvLista.get(i).setCim(ujErtek);
                         break;
                     case "Szerzo":
-                        konyvLista.get(i).setSzerzo(ujtipus);
+                        konyvLista.get(i).setSzerzo(ujErtek);
                         break;
                     case "Kiado":
-                        konyvLista.get(i).setKiado(ujtipus);
+                        konyvLista.get(i).setKiado(ujErtek);
                         break;
                     case "KiadasiEv":
-                        konyvLista.get(i).setKiadasiEv(ujtipus);
+                        konyvLista.get(i).setKiadasiEv(ujErtek);
                         break;
                     case "Kulcsszo":
-                        konyvLista.get(i).setKulcsszo(ujtipus);
+                        konyvLista.get(i).setKulcsszo(ujErtek);
                         break;
                     case "Elerhetoseg":
-                        konyvLista.get(i).setElerhetoseg(Boolean.parseBoolean(ujtipus));
+                        konyvLista.get(i).setElerhetoseg(Boolean.parseBoolean(ujErtek));
                         break;
                     default:
                         System.out.println("Kivant beallitasi tipus nincs jol megadva");

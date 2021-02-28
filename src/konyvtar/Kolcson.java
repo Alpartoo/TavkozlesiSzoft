@@ -1,6 +1,7 @@
 package konyvtar;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class Kolcson implements java.io.Serializable{
@@ -17,7 +18,8 @@ public class Kolcson implements java.io.Serializable{
         this.KonyvAzonosito = KonyvAzonosito;
         this.FelhasznaloID =FelhasznaloID;
         this.KonyvtarosID = KonyvtarosID;
-
+        this.KolcsonzesiDatum = LocalDate.now();
+        this.KolcsonHatarido = KolcsonzesiDatum.plus(2, ChronoUnit.WEEKS);
     }
 
     public void setKolcsonID(int kolcsonID) {
@@ -48,4 +50,11 @@ public class Kolcson implements java.io.Serializable{
         return KonyvtarosID;
     }
 
+    public LocalDate getKolcsonHatarido() {
+        return KolcsonHatarido;
+    }
+
+    public LocalDate getKolcsonzesiDatum() {
+        return KolcsonzesiDatum;
+    }
 }

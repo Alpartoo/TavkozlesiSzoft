@@ -10,6 +10,7 @@ public class Main {
 
         Konyv ujkonyv = new Konyv(6,"Proba","Babits Mihály","Corvin","1996.04.08","kulcsszo",true);
         KonyvLista konyvlista = new KonyvLista();
+        KolcsonLista kolcsonLista =new KolcsonLista();
 
         //konyvlista.konyvHozzadas(ujkonyv);
         //konyvlista.konyvListaMentes();
@@ -22,6 +23,9 @@ public class Main {
         //konyvlista.konyvListaOlvasas();
         //konyvlista.konyvekKiirasa();
         konyvlista.konyvKeresese("Elerhetoseg","true");
+        kolcsonLista.kolcsonListaMentes();
+        kolcsonLista.kolcsonListaOlvasas();
+
     }
 
 }
