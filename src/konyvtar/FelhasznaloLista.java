@@ -8,7 +8,7 @@ public class FelhasznaloLista implements java.io.Serializable {
     public ArrayList<Felhasznalo> felhasznaloLista;
     public FelhasznaloLista() {
 
-        Felhasznalo[] Felhasznalok = new Felhasznalo[5];
+        Felhasznalo[] Felhasznalok = new Felhasznalo[100];
         this.felhasznaloLista = new ArrayList<>();
 
         Felhasznalok[0] = new Felhasznalo(0, "Sandor", "Amburs Lajos", "ghguu@gmail.com", 754896378);

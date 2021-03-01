@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class KonyvLista implements java.io.Serializable {
 
     public ArrayList<Konyv>  konyvLista;
+
     public KonyvLista(){
 
         Konyv[] Konyvek = new Konyv[6];
@@ -73,8 +74,9 @@ public class KonyvLista implements java.io.Serializable {
 
     public void konyvHozzadas (Konyv ujkonyv){
 
-        ujkonyv.setKonyvID(konyvLista.size());
+        //ujkonyv.setKonyvID(konyvLista.size());
         this.konyvLista.add(ujkonyv);
+        konyListaIDRend();
     }
 
     public void konyvTorlese (String konyvcim){
@@ -86,6 +88,7 @@ public class KonyvLista implements java.io.Serializable {
                 System.out.println("torolt");
             }
         }
+        konyListaIDRend();
     }
 
     public void konyvekKiirasa(){
@@ -212,4 +215,17 @@ public class KonyvLista implements java.io.Serializable {
                 System.out.println("Kivant keresesi tipus nincs jol megadva");
         }
     }
+
+    public void konyListaIDRend(){
+
+        for( int i=0;i< konyvLista.size();i++ ) {
+            konyvLista.get(i).setKonyvID(i);
+        }
+
+    }
+
+    public void konyvekSzama(){
+        System.out.println(konyvLista.size());
+    }
+
 }
