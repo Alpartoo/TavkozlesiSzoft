@@ -67,7 +67,10 @@ public class KolcsonLista {
     }
     public void kolcsonzesHozzadas (Kolcson ujkolcsonzes){
 
-        ujkolcsonzes.setKolcsonID(kolcsonLista.size());
+        int utolsoelem = kolcsonLista.size()-1;
+        System.out.println("utolso elem"+utolsoelem);
+        ujkolcsonzes.setKolcsonID((kolcsonLista.get(utolsoelem).getKolcsonID())+1);
+        System.out.println("utolso elemID"+ujkolcsonzes.getKolcsonID());
         this.kolcsonLista.add(ujkolcsonzes);
     }
 
@@ -89,17 +92,14 @@ public class KolcsonLista {
         }
     }
 
-    public void kolcsonzesAdatok(int ID){
-        for( int i=0;i< kolcsonLista.size();++i ) {
-            if (kolcsonLista.get(i).getKolcsonID()== ID){
+    public void kolcsonzesAdatok(int i){
                 System.out.println("KolcsonID: " + kolcsonLista.get(i).getKolcsonID());
                 System.out.println("KonyvAzonosito: " + kolcsonLista.get(i).getKonyvAzonosito());
                 System.out.println("FelhasznaloID: " + kolcsonLista.get(i).getFelhasznaloID());
                 System.out.println("KonyvtarosID: " + kolcsonLista.get(i).getKonyvtarosID());
                 System.out.println("KolcsonzesiDatum: " + kolcsonLista.get(i).getKolcsonzesiDatum());
                 System.out.println(": " + kolcsonLista.get(i).getKolcsonHatarido());
-            }
-        }
+
     }
 
     public void kolcsonzesAdatModositasa(int konyvID,String tipus,int ujErtek){

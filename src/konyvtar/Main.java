@@ -19,14 +19,16 @@ public class Main {
         FelhasznaloLista felhasznaloLista = new FelhasznaloLista();
 
 
-        konyvlista.konyvekSzama();
+        //konyvlista.konyvekSzama();
         konyvlista.konyvHozzadas(ujkonyv);
         konyvlista.konyvHozzadas(ujkonyv2);
         konyvlista.konyvHozzadas(ujkonyv3);
-        konyvlista.konyvListaMentes();
+        //konyvlista.konyvListaMentes();
         //konyvlista.konyvListaOlvasas();
         konyvlista.konyvekKiirasa();
         konyvlista.konyvTorlese("Proba");
+        konyvlista.konyvekSzama();
+        konyvlista.konyvekKiirasa();
         konyvlista.konyvHozzadas(ujkonyv4);
         //konyvlista.konyvListaMentes();
         //konyvlista.konyvListaOlvasas();

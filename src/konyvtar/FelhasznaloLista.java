@@ -68,7 +68,10 @@ public class FelhasznaloLista implements java.io.Serializable {
 
         public void felhasznaloHozzadas (Felhasznalo ujFelhasznalo){
 
-            ujFelhasznalo.setFelhasznaloID(felhasznaloLista.size());
+            int utolsoelem = felhasznaloLista.size()-1;
+            System.out.println("utolso elem"+utolsoelem);
+            ujFelhasznalo.setFelhasznaloID((felhasznaloLista.get(utolsoelem).getFelhasznaloID())+1);
+            System.out.println("utolso elemID"+ujFelhasznalo.getFelhasznaloID());
             this.felhasznaloLista.add(ujFelhasznalo);
         }
 
@@ -90,16 +93,13 @@ public class FelhasznaloLista implements java.io.Serializable {
             }
         }
 
-        public void felhasznaloAdatok(int ID){
-            for( int i=0;i< felhasznaloLista.size();++i ) {
-                if (felhasznaloLista.get(i).getFelhasznaloID()== ID){
+        public void felhasznaloAdatok(int i){
+
                     System.out.println("felhasznaloID: " + felhasznaloLista.get(i).felhasznaloID);
                     System.out.println("Nev: " + felhasznaloLista.get(i).getNev());
                     System.out.println("Lakcim: " + felhasznaloLista.get(i).getLakcim());
                     System.out.println("Email: " + felhasznaloLista.get(i).getEmail());
                     System.out.println("Telefon: " + felhasznaloLista.get(i).getTelefon());
-                }
-            }
         }
 
         public void felhasznaloAdatModositasa(int konyvID,String tipus,String ujErtek){

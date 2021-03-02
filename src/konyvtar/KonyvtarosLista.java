@@ -67,8 +67,10 @@ public class KonyvtarosLista {
     }
 
     public void konyvtarosHozzadas (Konyvtaros ujkonyvtaros){
-
-        ujkonyvtaros.setKonyvtarosID(konyvtarosLista.size());
+        int utolsoelem = konyvtarosLista.size()-1;
+        System.out.println("utolso elem"+utolsoelem);
+        ujkonyvtaros.setKonyvtarosID((konyvtarosLista.get(utolsoelem).getKonyvtarosID())+1);
+        System.out.println("utolso elemID"+ujkonyvtaros.getKonyvtarosID());
         this.konyvtarosLista.add(ujkonyvtaros);
     }
 
@@ -90,17 +92,13 @@ public class KonyvtarosLista {
         }
     }
 
-    public void konyvtarosAdatok(int ID){
-        for( int i=0;i< konyvtarosLista.size();++i ) {
-            if (konyvtarosLista.get(i).getKonyvtarosID()== ID){
+    public void konyvtarosAdatok(int i){
                 System.out.println("konyvtarosID: " + konyvtarosLista.get(i).getKonyvtarosID());
                 System.out.println("Nev: " + konyvtarosLista.get(i).getNev());
                 System.out.println("Lakcim: " + konyvtarosLista.get(i).getLakcim());
                 System.out.println("Email: " + konyvtarosLista.get(i).getEmail());
                 System.out.println("Telefon: " + konyvtarosLista.get(i).getTelefon());
                 System.out.println("Jelszo: " + konyvtarosLista.get(i).getJelszo());
-            }
-        }
     }
 
     public void konyvtarosAdatModositasa(int konyvID,String tipus,String ujErtek){

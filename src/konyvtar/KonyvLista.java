@@ -73,10 +73,11 @@ public class KonyvLista implements java.io.Serializable {
     }
 
     public void konyvHozzadas (Konyv ujkonyv){
-
-        //ujkonyv.setKonyvID(konyvLista.size());
+        int utolsoelem = konyvLista.size()-1;
+        System.out.println("utolso elem"+utolsoelem);
+        ujkonyv.setKonyvID((konyvLista.get(utolsoelem).getKonyvID())+1);
+        System.out.println("utolso elemID"+ujkonyv.getKonyvID());
         this.konyvLista.add(ujkonyv);
-        konyListaIDRend();
     }
 
     public void konyvTorlese (String konyvcim){
@@ -85,10 +86,9 @@ public class KonyvLista implements java.io.Serializable {
             Cim=konyvLista.get(i).getCim();
             if (Cim.equals(konyvcim)) {
                 konyvLista.remove(i);
-                System.out.println("torolt");
+                System.out.println("torolt"+i);
             }
         }
-        konyListaIDRend();
     }
 
     public void konyvekKiirasa(){
@@ -99,18 +99,15 @@ public class KonyvLista implements java.io.Serializable {
     }
 
     public void konyAdatok(int ID){
-        for( int i=0;i< konyvLista.size();++i ) {
-            if (konyvLista.get(i).getKonyvID()== ID){
-                System.out.println("konyvID: " + konyvLista.get(i).getKonyvID());
-                System.out.println("Cim: " + konyvLista.get(i).getCim());
-                System.out.println("Szerzo: " + konyvLista.get(i).getSzerzo());
-                System.out.println("Kiado: " + konyvLista.get(i).getKiado());
-                System.out.println("KiadasiEv: " + konyvLista.get(i).getKiadasiEv());
-                System.out.println("Kulcsszo: " + konyvLista.get(i).getKulcsszo());
-                System.out.println("Elerheto: " + konyvLista.get(i).getElerhetoseg());
-            }
-        }
+                System.out.println("konyvID: " + konyvLista.get(ID).getKonyvID());
+                System.out.println("Cim: " + konyvLista.get(ID).getCim());
+                System.out.println("Szerzo: " + konyvLista.get(ID).getSzerzo());
+                System.out.println("Kiado: " + konyvLista.get(ID).getKiado());
+                System.out.println("KiadasiEv: " + konyvLista.get(ID).getKiadasiEv());
+                System.out.println("Kulcsszo: " + konyvLista.get(ID).getKulcsszo());
+                System.out.println("Elerheto: " + konyvLista.get(ID).getElerhetoseg());
     }
+
 
     public void konyvAdatModositasa(int konyvID,String tipus,String ujErtek){
         int ID=0;                                                       // meglehet csinalni,hogy egyszerre tobb parametert is valtoztassunk,
@@ -214,14 +211,6 @@ public class KonyvLista implements java.io.Serializable {
             default:
                 System.out.println("Kivant keresesi tipus nincs jol megadva");
         }
-    }
-
-    public void konyListaIDRend(){
-
-        for( int i=0;i< konyvLista.size();i++ ) {
-            konyvLista.get(i).setKonyvID(i);
-        }
-
     }
 
     public void konyvekSzama(){
