@@ -1,6 +1,9 @@
 package konyvtar;
 
-import java.util.ArrayList;
+import konyvtar.Lista.FelhasznaloLista;
+import konyvtar.Lista.KolcsonLista;
+import konyvtar.Lista.KonyvLista;
+import konyvtar.Lista.KonyvtarosLista;
 
 public class Main {
 
@@ -20,25 +23,30 @@ public class Main {
 
 
         //konyvlista.konyvekSzama();
-        konyvlista.konyvHozzadas(ujkonyv);
+        /*konyvlista.konyvHozzadas(ujkonyv);
         konyvlista.konyvHozzadas(ujkonyv2);
-        konyvlista.konyvHozzadas(ujkonyv3);
+        konyvlista.konyvHozzadas(ujkonyv3);*/
         //konyvlista.konyvListaMentes();
         //konyvlista.konyvListaOlvasas();
-        konyvlista.konyvekKiirasa();
+       /* konyvlista.konyvekKiirasa();
         konyvlista.konyvTorlese("Proba");
         konyvlista.konyvekSzama();
         konyvlista.konyvekKiirasa();
-        konyvlista.konyvHozzadas(ujkonyv4);
+        konyvlista.konyvHozzadas(ujkonyv4);*/
         //konyvlista.konyvListaMentes();
         //konyvlista.konyvListaOlvasas();
         //konyvlista.konyvAdatModositasa(6,"ID","7");
         //konyvlista.konyvListaMentes();
         //konyvlista.konyvListaOlvasas();
-        konyvlista.konyvekKiirasa();
+        //konyvlista.konyvekKiirasa();
         //konyvlista.konyvKeresese("Elerhetoseg","true");
         //kolcsonLista.kolcsonListaOlvasas();
-
+        //konyvlista.WriteXMLFileKonyvek();
+        konyvlista.OlvasasXmlKonyvek();
+        //kolcsonLista.WriteXMLFileKolcsonok();
+        kolcsonLista.OlvasasXmlKolcsonok();
+        //konyvtarosLista.WriteXMLFileKonyvtaros();
+        konyvtarosLista.OlvasasXmlKonyvtaros();
 
 
     }

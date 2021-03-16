@@ -1,5 +1,16 @@
-package konyvtar;
+package konyvtar.Lista;
 
+import konyvtar.Felhasznalo;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -181,4 +192,111 @@ public class FelhasznaloLista implements java.io.Serializable {
                     System.out.println("Kivant keresesi tipus nincs jol megadva");
             }
         }
+    public  void WriteXMLFileFelhasznalok(){
+        try {
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+            // root elements
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement("Felhasznalok");
+            doc.appendChild(rootElement);
+
+
+            for (int i = 0; i < felhasznaloLista.size(); ++i) {
+
+                // staff elements
+                Element felhasznalo = doc.createElement("felhasznalo");
+                rootElement.appendChild(felhasznalo);
+
+                // set attribute to staff element
+                Attr attr = doc.createAttribute("id");
+                attr.setValue(Integer.toString(felhasznaloLista.get(i).getFelhasznaloID()));
+                felhasznalo.setAttributeNode(attr);
+
+                // shorten way
+                // staff.setAttribute("id", "1");
+
+                //
+                Element Nev = doc.createElement("Nev");
+                Nev.appendChild(doc.createTextNode(felhasznaloLista.get(i).getNev()));
+                felhasznalo.appendChild(Nev);
+
+                //
+                Element Lakcim = doc.createElement("Lakcim");
+                Lakcim.appendChild(doc.createTextNode(felhasznaloLista.get(i).getLakcim()));
+                felhasznalo.appendChild(Lakcim);
+
+                //
+                Element Email = doc.createElement("Email");
+                Email.appendChild(doc.createTextNode(felhasznaloLista.get(i).getEmail()));
+                felhasznalo.appendChild(Email);
+
+                //
+                Element Telefon = doc.createElement("Telefon");
+                Telefon.appendChild(doc.createTextNode(Long.toString(felhasznaloLista.get(i).getTelefon())));
+                felhasznalo.appendChild(Telefon);
+
+                // write the content into xml file
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(new File("D:\\Suliba\\IV\\II felev\\TavkozlesiSzoft\\src\\konyvtar\\felhasznaloListaXML.xml"));
+
+                // Output to console for testing
+                // StreamResult result = new StreamResult(System.out);
+
+                transformer.transform(source, result);
+            }
+            System.out.println("File saved!");
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+
+
+        }
     }
+
+    public void OlvasasXmlFelhasznalok (){
+        try {
+
+            File fXmlFile = new File("D:\\Suliba\\IV\\II felev\\TavkozlesiSzoft\\src\\konyvtar\\felhasznaloListaXML.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+
+            doc.getDocumentElement().normalize();
+
+            System.out.println("Gyoker elem :" + doc.getDocumentElement().getNodeName());
+
+            NodeList nList = doc.getElementsByTagName("felhasznalo");
+
+            System.out.println("----------------------------");
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                Node nNode = nList.item(temp);
+
+                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element eElement = (Element) nNode;
+
+                    System.out.println("felhasznaloID : " + eElement.getAttribute("id"));
+                    System.out.println("Nev: " + eElement.getElementsByTagName("Nev").item(0).getTextContent());
+                    System.out.println("Lakcim: " + eElement.getElementsByTagName("Lakcim").item(0).getTextContent());
+                    System.out.println("Email: " + eElement.getElementsByTagName("Email").item(0).getTextContent());
+                    System.out.println("Telefon: " + eElement.getElementsByTagName("Telefon").item(0).getTextContent());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}

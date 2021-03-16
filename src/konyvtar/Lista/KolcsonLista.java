@@ -1,7 +1,20 @@
-package konyvtar;
+package konyvtar.Lista;
 
+import konyvtar.Kolcson;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class KolcsonLista {
 
@@ -182,6 +195,119 @@ public class KolcsonLista {
                 break;
             default:
                 System.out.println("Kivant keresesi tipus nincs jol megadva");
+        }
+    }
+
+    public  void WriteXMLFileKolcsonok(){
+        try {
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+            // root elements
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement("kolcsonLista");
+            doc.appendChild(rootElement);
+
+
+            for (int i = 0; i < kolcsonLista.size(); ++i) {
+
+                // staff elements
+                Element kolcson = doc.createElement("kolcson");
+                rootElement.appendChild(kolcson);
+
+                // set attribute to staff element
+                Attr attr = doc.createAttribute("id");
+                attr.setValue(Integer.toString(kolcsonLista.get(i).getKolcsonID()));
+                kolcson.setAttributeNode(attr);
+
+                // shorten way
+                // staff.setAttribute("id", "1");
+
+                //
+                Element KonyvAzonosito = doc.createElement("KonyvAzonosito");
+                KonyvAzonosito.appendChild(doc.createTextNode(Integer.toString(kolcsonLista.get(i).getKonyvAzonosito())));
+                kolcson.appendChild(KonyvAzonosito);
+
+                //
+                Element FelhasznaloID = doc.createElement("FelhasznaloID");
+                FelhasznaloID.appendChild(doc.createTextNode(Integer.toString(kolcsonLista.get(i).getFelhasznaloID())));
+                kolcson.appendChild(FelhasznaloID);
+
+                //
+                Element KonyvtarosID = doc.createElement("KonyvtarosID");
+                KonyvtarosID.appendChild(doc.createTextNode(Integer.toString(kolcsonLista.get(i).getKonyvtarosID())));
+                kolcson.appendChild(KonyvtarosID);
+
+                //
+                Element Telefon = doc.createElement("KolcsonzesiDatum");
+                Telefon.appendChild(doc.createTextNode((kolcsonLista.get(i).getKolcsonzesiDatum()).toString()));
+                kolcson.appendChild(Telefon);
+
+                //
+                Element KolcsonHatarido = doc.createElement("KolcsonHatarido");
+                KolcsonHatarido.appendChild(doc.createTextNode((kolcsonLista.get(i).getKolcsonHatarido()).toString()));
+                kolcson.appendChild(KolcsonHatarido);
+
+                // write the content into xml file
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(new File("D:\\Suliba\\IV\\II felev\\TavkozlesiSzoft\\src\\konyvtar\\kolcsonListaXML.xml"));
+
+                // Output to console for testing
+                // StreamResult result = new StreamResult(System.out);
+
+                transformer.transform(source, result);
+            }
+            System.out.println("File saved!");
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+
+
+        }
+    }
+
+    public void OlvasasXmlKolcsonok (){
+        try {
+
+            File fXmlFile = new File("D:\\Suliba\\IV\\II felev\\TavkozlesiSzoft\\src\\konyvtar\\kolcsonListaXML.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+
+            doc.getDocumentElement().normalize();
+
+            System.out.println("Gyoker elem :" + doc.getDocumentElement().getNodeName());
+
+            NodeList nList = doc.getElementsByTagName("kolcson");
+
+            System.out.println("----------------------------");
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                Node nNode = nList.item(temp);
+
+                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element eElement = (Element) nNode;
+
+                    System.out.println("KolcsonID : " + eElement.getAttribute("id"));
+                    System.out.println("KonyvAzonosito: " + eElement.getElementsByTagName("KonyvAzonosito").item(0).getTextContent());
+                    System.out.println("FelhasznaloID: " + eElement.getElementsByTagName("FelhasznaloID").item(0).getTextContent());
+                    System.out.println("KonyvtarosID: " + eElement.getElementsByTagName("KonyvtarosID").item(0).getTextContent());
+                    System.out.println("KolcsonzesiDatum: " + eElement.getElementsByTagName("KolcsonzesiDatum").item(0).getTextContent());
+                    System.out.println("KolcsonHatarido: " + eElement.getElementsByTagName("KolcsonHatarido").item(0).getTextContent());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,5 +1,16 @@
-package konyvtar;
+package konyvtar.Lista;
 
+import konyvtar.Konyv;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -217,4 +228,123 @@ public class KonyvLista implements java.io.Serializable {
         System.out.println(konyvLista.size());
     }
 
+    public  void WriteXMLFileKonyvek(){
+        try {
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+            // root elements
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement("konyvtar");
+            doc.appendChild(rootElement);
+
+
+            for (int i = 0; i < konyvLista.size(); ++i) {
+
+                // staff elements
+                Element Konyv = doc.createElement("Konyv");
+                rootElement.appendChild(Konyv);
+
+                // set attribute to staff element
+                Attr attr = doc.createAttribute("id");
+                attr.setValue(Integer.toString(konyvLista.get(i).getKonyvID()));
+                Konyv.setAttributeNode(attr);
+
+                // shorten way
+                // staff.setAttribute("id", "1");
+
+                //
+                Element Cim = doc.createElement("Cim");
+                Cim.appendChild(doc.createTextNode(konyvLista.get(i).getCim()));
+                Konyv.appendChild(Cim);
+
+                //
+                Element Szerzo = doc.createElement("Szerzo");
+                Szerzo.appendChild(doc.createTextNode(konyvLista.get(i).getSzerzo()));
+                Konyv.appendChild(Szerzo);
+
+                //
+                Element Kiado = doc.createElement("Kiado");
+                Kiado.appendChild(doc.createTextNode(konyvLista.get(i).getKiado()));
+                Konyv.appendChild(Kiado);
+
+                //
+                Element KiadasiEv = doc.createElement("KiadasiEv");
+                KiadasiEv.appendChild(doc.createTextNode(konyvLista.get(i).getKiadasiEv()));
+                Konyv.appendChild(KiadasiEv);
+
+                //
+                Element Elerhetoseg = doc.createElement("Elerhetoseg");
+                Elerhetoseg.appendChild(doc.createTextNode(Boolean.toString(konyvLista.get(i).getElerhetoseg())));
+                Konyv.appendChild(Elerhetoseg);
+
+                //
+                Element Kulcsszo = doc.createElement("Kulcsszo");
+                Kulcsszo.appendChild(doc.createTextNode(konyvLista.get(i).getKulcsszo()));
+                Konyv.appendChild(Kulcsszo);
+
+                // write the content into xml file
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(new File("D:\\Suliba\\IV\\II felev\\TavkozlesiSzoft\\src\\konyvtar\\konyvLista.txt"));
+
+                // Output to console for testing
+                // StreamResult result = new StreamResult(System.out);
+
+                transformer.transform(source, result);
+            }
+            System.out.println("File saved!");
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+
+
+        }
+    }
+
+    public void OlvasasXmlKonyvek (){
+        try {
+
+            File fXmlFile = new File("D:\\Suliba\\IV\\II felev\\TavkozlesiSzoft\\src\\konyvtar\\konyvLista.txt");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+
+            doc.getDocumentElement().normalize();
+
+            System.out.println("GYoker elem :" + doc.getDocumentElement().getNodeName());
+
+            NodeList nList = doc.getElementsByTagName("Konyv");
+
+            System.out.println("----------------------------");
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+
+                Node nNode = nList.item(temp);
+
+                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element eElement = (Element) nNode;
+
+                    System.out.println("konyvID : " + eElement.getAttribute("id"));
+                    System.out.println("Cim: " + eElement.getElementsByTagName("Cim").item(0).getTextContent());
+                    System.out.println("Szerzo: " + eElement.getElementsByTagName("Szerzo").item(0).getTextContent());
+                    System.out.println("Kiado: " + eElement.getElementsByTagName("Kiado").item(0).getTextContent());
+                    System.out.println("KiadasiEv: " + eElement.getElementsByTagName("KiadasiEv").item(0).getTextContent());
+                    System.out.println("Kulcsszo: " + eElement.getElementsByTagName("Kulcsszo").item(0).getTextContent());
+                    System.out.println("Elerhetoseg: " + eElement.getElementsByTagName("Elerhetoseg").item(0).getTextContent());
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
